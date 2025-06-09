@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import TaskForm from './components/TaskForm';
+import TaskList from './components/TaskList';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [sortBy, setSortBy] = useState('');
+  const [priorityFilter, setPriorityFilter] = useState('');
+
+  const handleAddTask = (newTask) => {
+    // This will be handled by TaskList's useEffect
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Task Manager</h1>
+      <TaskForm onAddTask={handleAddTask} />
+      <div className="filter-sort">
+        <label>Filter by Priority: </label>
+        <select onChange={(e) => setPriorityFilter(e.target.value)} value={priorityFilter}>
+          <option value="">All</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <label style={{ marginLeft: '20px' }}>Sort by: </label>
+        <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
+          <option value="">None</option>
+          <option value="priority">Priority</option>
+          <option value="deadline">Deadline</option>
+        </select>
+      </div>
+      <TaskList sortBy={sortBy} priorityFilter={priorityFilter} />
     </div>
   );
-}
+};
 
 export default App;
