@@ -30,9 +30,6 @@ const TaskList = ({ sortBy, priorityFilter }) => {
     fetchTasks();
   }, [sortBy, priorityFilter]);
 
-  const handleAddTask = (newTask) => {
-    setTasks([...tasks, newTask]);
-  };
 
   const handleDeleteTask = (taskId) => {
     setTasks(tasks.filter(task => task.id !== taskId));
